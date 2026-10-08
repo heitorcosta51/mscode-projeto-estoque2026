@@ -8,6 +8,7 @@ $router = [
     'routes' => [
         '/' => AppController::class,
         '/error' => ErrorController::class,
+        '/login' => AppController::class,
     ],
     'default' => NotFoundController::class
 ];
