@@ -19,7 +19,12 @@ class Query
         $this->pdo = $database->connection();
     }
 
-    public function select(string $tabela, ?string $condicao = null, string $colunas = '*'): false|array
+    public function select(
+        string $tabela,
+        ?string $condicao = null,
+        string $colunas = '*',
+        array $parametros = [],
+    ): false|array
     {
         try {
             $sql = "SELECT {$colunas} FROM {$tabela}";
@@ -29,6 +34,9 @@ class Query
             }
 
             $stmt = $this->pdo->prepare($sql);
+            foreach ($parametros as $parametro => $valor) {
+                $stmt->bindValue(":{$parametro}", $valor);
+            }
             $stmt->execute();
 
             return $stmt->fetchAll(\PDO::FETCH_ASSOC);
