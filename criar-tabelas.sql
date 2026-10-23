@@ -13,7 +13,7 @@ CREATE TABLE produto (
   data_cadastro DATETIME DEFAULT CURRENT_TIMESTAMP,
   quantidade_inicial INT,
   quantidade_disponivel INT,
-  valor INT,
+  valor DECIMAL(10, 2) NOT NULL,
   FOREIGN KEY (categoria_id) REFERENCES categoria(id)
 );
 

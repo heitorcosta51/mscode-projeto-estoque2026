@@ -8,6 +8,9 @@ use App\Controller\Home\HomeController;
 use App\Controller\Login\LoginController;
 use App\Controller\Categoria\NovaCategoriaController;
 use App\Controller\Categoria\CadastrarCategoriaController;
+use App\Controller\Produto\ProdutoController;
+use App\Controller\Produto\NovoProdutoController;
+use App\Controller\Produto\CadastrarProdutoController;
 
 $router = [
     'routes' => [
@@ -20,6 +23,10 @@ $router = [
         '/categorias' => CategoriaController::class,
         '/nova_categoria' => NovaCategoriaController::class,
         '/cadastrar_categoria' => CadastrarCategoriaController::class,
+
+        '/produtos' => ProdutoController::class,
+        '/novo_produto' => NovoProdutoController::class,
+        '/cadastrar_produto' => CadastrarProdutoController::class,
     ],
     'default' => NotFoundController::class
 ];
