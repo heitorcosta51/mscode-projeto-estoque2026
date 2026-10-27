@@ -7,7 +7,7 @@
   <title>MS Code - Projeto Estoque 2025</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link href="/css/styles.css" rel="stylesheet">
 </head>
@@ -25,7 +25,8 @@
           <ul class="nav nav-pills d-flex align-items-center">
             <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Início</a></li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Vendas
               </a>
               <ul class="dropdown-menu">
@@ -34,7 +35,8 @@
               </ul>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
                 Produtos
               </a>
               <ul class="dropdown-menu">
@@ -69,20 +71,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>nome</td>
-            <td>descrição</td>
-            <td>categoria id</td>
-            <td>R$ 398,00</td>
-            <td>2</td>
-            <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-              <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i class="bi bi-plus"></i></button>
-              <button class="btn btn-secondary btn-sm" title="Editar produto"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
-              <button class="btn btn-primary btn-sm" title="Vender produto (decrementar 1)">Vender</button>
-            </td>
-          </tr>
+          <?php foreach ($data['produtos'] as $produto): ?>
+            <tr>
+              <th scope="row"><?= (int) $produto['id'] ?></th>
+              <td><?= htmlspecialchars($produto['nome'], ENT_QUOTES, 'UTF-8') ?></td>
+              <td><?= htmlspecialchars($produto['descricao'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
+              <td><?= (int) $produto['categoria_id'] ?></td>
+              <td>R$ <?= number_format((float) $produto['valor'], 2, ',', '.') ?></td>
+              <td><?= (int) $produto['quantidade_disponivel'] ?></td>
+              <td class="col-2 d-flex gap-1 w-auto flex-wrap">
+                <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
+                    class="bi bi-plus"></i></button>
+                <a class="btn btn-secondary btn-sm" href="/editar_produto?id=<?= (int) $produto['id'] ?>"
+                  title="Editar produto">
+                  <i class="bi bi-pencil"></i>
+                </a>
+                <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
+                <button class="btn btn-primary btn-sm" title="Vender produto (decrementar 1)">Vender</button>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
 
       </table>

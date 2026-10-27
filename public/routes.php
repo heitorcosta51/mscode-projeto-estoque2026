@@ -9,6 +9,8 @@ use App\Controller\Login\LoginController;
 use App\Controller\Categoria\NovaCategoriaController;
 use App\Controller\Categoria\CadastrarCategoriaController;
 use App\Controller\Produto\ProdutoController;
+use App\Controller\Produto\EditarProdutoController;
+use App\Controller\Produto\AtualizarProdutoController;
 use App\Controller\Produto\NovoProdutoController;
 use App\Controller\Produto\CadastrarProdutoController;
 
@@ -27,6 +29,8 @@ $router = [
         '/produtos' => ProdutoController::class,
         '/novo_produto' => NovoProdutoController::class,
         '/cadastrar_produto' => CadastrarProdutoController::class,
+        '/editar_produto' => EditarProdutoController::class,
+        '/atualizar_produto' => AtualizarProdutoController::class,
     ],
     'default' => NotFoundController::class
 ];

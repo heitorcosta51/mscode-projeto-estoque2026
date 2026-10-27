@@ -3,11 +3,17 @@
 namespace App\Controller\Produto;
 
 use App\Controller\AbstractController;
+use App\Model\Produto\ProdutoModel;
 
 class ProdutoController extends AbstractController
 {
     public function index(array $requesData): void
     {
-        $this->render('produto/produtos.php');
+        $model = new ProdutoModel();
+        $produtos = $model->listar();
+
+        $this->render('produto/produtos.php', [
+            'produtos' => $produtos,
+        ]);
     }
 }
