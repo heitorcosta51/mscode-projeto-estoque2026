@@ -24,12 +24,11 @@ class Query
         ?string $condicao = null,
         string $colunas = '*',
         array $parametros = [],
-    ): false|array
-    {
+    ): false|array {
         try {
             $sql = "SELECT {$colunas} FROM {$tabela}";
 
-            if($condicao !== null) {
+            if ($condicao !== null) {
                 $sql .= " WHERE {$condicao}";
             }
 
@@ -98,19 +97,22 @@ class Query
         }
     }
 
-    public function delete(string $tabela, string $condicao): bool
+    public function delete(string $tabela, string $condicao, array $parametros = []): bool
     {
         try {
             $sql = "DELETE FROM {$tabela} WHERE {$condicao}";
-
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute();
 
-            return true;
+            foreach ($parametros as $chave => $valor) {
+                $stmt->bindValue(":{$chave}", $valor);
+            }
+
+            return $stmt->execute();
         } catch (\PDOException $e) {
-            echo "Erro na exclusão: {$e->getMessage()}";
 
+            error_log("Erro na exclusão: " . $e->getMessage());
             return false;
         }
     }
+
 }

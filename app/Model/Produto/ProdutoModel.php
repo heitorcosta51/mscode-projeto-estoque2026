@@ -13,6 +13,15 @@ class ProdutoModel
         $this->query = new Query();
     }
 
+
+    // Operação do Modelo de Excluir
+    public function excluir(int $id): void
+    {
+        if (!$this->query->delete('produto', 'id = :id', ['id' => $id])) {
+            throw new \RuntimeException('Não foi possivel excluir o Produto');
+        }
+    }
+
     public function listar(): array
     {
         $produtos = $this->query->select(

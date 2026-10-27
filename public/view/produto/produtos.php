@@ -70,28 +70,41 @@
             <th scope="col-2 text-align-right">Ações</th>
           </tr>
         </thead>
-        <tbody>
-          <?php foreach ($data['produtos'] as $produto): ?>
-            <tr>
-              <th scope="row"><?= (int) $produto['id'] ?></th>
-              <td><?= htmlspecialchars($produto['nome'], ENT_QUOTES, 'UTF-8') ?></td>
-              <td><?= htmlspecialchars($produto['descricao'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
-              <td><?= (int) $produto['categoria_id'] ?></td>
-              <td>R$ <?= number_format((float) $produto['valor'], 2, ',', '.') ?></td>
-              <td><?= (int) $produto['quantidade_disponivel'] ?></td>
-              <td class="col-2 d-flex gap-1 w-auto flex-wrap">
-                <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)"><i
-                    class="bi bi-plus"></i></button>
-                <a class="btn btn-secondary btn-sm" href="/editar_produto?id=<?= (int) $produto['id'] ?>"
-                  title="Editar produto">
-                  <i class="bi bi-pencil"></i>
-                </a>
-                <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
-                <button class="btn btn-primary btn-sm" title="Vender produto (decrementar 1)">Vender</button>
-              </td>
-            </tr>
-          <?php endforeach; ?>
-        </tbody>
+<tbody> 
+    <?php foreach ($data['produtos'] as $produto): ?> 
+        <tr> 
+            <th scope="row"><?= (int) $produto['id'] ?></th> 
+            <td><?= htmlspecialchars($produto['nome'], ENT_QUOTES, 'UTF-8') ?></td> 
+            <td><?= htmlspecialchars($produto['descricao'] ?? '', ENT_QUOTES, 'UTF-8') ?></td> 
+            <td><?= (int) $produto['categoria_id'] ?></td> 
+            <td>R$ <?= number_format((float) $produto['valor'], 2, ',', '.') ?></td> 
+            <td><?= (int) $produto['quantidade_disponivel'] ?></td> 
+            <td class="col-2 d-flex gap-1 w-auto flex-wrap align-items-center"> 
+                <!-- Incrementar -->
+                <button class="btn btn-primary btn-sm" title="Adicionar 1 (incrementar quantidade)">
+                    <i class="bi bi-plus"></i>
+                </button> 
+                
+                <!-- Botão de editar -->
+                <a class="btn btn-secondary btn-sm" href="/editar_produto?id=<?= (int) $produto['id'] ?>" title="Editar produto"> 
+                    <i class="bi bi-pencil"></i> 
+                </a> 
+
+                <!-- Botão de excluir com POST -->
+                <form action="/excluir_produto" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este produto?');" class="m-0"> 
+                    <input type="hidden" name="id" value="<?= (int) $produto['id'] ?>"> 
+                    <button type="submit" class="btn btn-danger btn-sm" title="Excluir produto"> 
+                        <i class="bi bi-trash"></i> 
+                    </button> 
+                </form> 
+
+                <!-- Botão de Vender -->
+                <button class="btn btn-primary btn-sm" title="Vender produto (decrementar 1)">Vender</button> 
+            </td> 
+        </tr> 
+    <?php endforeach; ?> 
+</tbody>
+
 
       </table>
     </div>
