@@ -9,6 +9,9 @@ use App\Controller\Login\LoginController;
 use App\Controller\Categoria\NovaCategoriaController;
 use App\Controller\Produto\ExcluirProdutoController;
 use App\Controller\Categoria\CadastrarCategoriaController;
+use App\Controller\Categoria\EditarCategoriaController;
+use App\Controller\Categoria\AtualizarCategoriaController;
+use App\Controller\Categoria\ExcluirCategoriaController;
 use App\Controller\Produto\ProdutoController;
 use App\Controller\Produto\EditarProdutoController;
 use App\Controller\Produto\AtualizarProdutoController;
@@ -26,6 +29,9 @@ $router = [
         '/categorias' => CategoriaController::class,
         '/nova_categoria' => NovaCategoriaController::class,
         '/cadastrar_categoria' => CadastrarCategoriaController::class,
+        '/editar_categoria' => EditarCategoriaController::class,
+        '/atualizar_categoria' => AtualizarCategoriaController::class,
+        '/excluir_categoria' => ExcluirCategoriaController::class,
 
         '/produtos' => ProdutoController::class,
         '/novo_produto' => NovoProdutoController::class,

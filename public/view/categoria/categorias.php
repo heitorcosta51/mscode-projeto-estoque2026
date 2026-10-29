@@ -67,14 +67,26 @@
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Informática</td>
-            <td class="col-1 text-align-right">
-              <button class="btn btn-secondary btn-sm" title="Editar"><i class="bi bi-pencil"></i></button>
-              <button class="btn btn-danger btn-sm" title="Excluir"><i class="bi bi-trash"></i></button>
-            </td>
-          </tr>
+          <?php foreach ($data['categorias'] as $categoria): ?>
+            <tr>
+              <th scope="row"><?= (int) $categoria['id'] ?></th>
+              <td><?= htmlspecialchars($categoria['nome'], ENT_QUOTES, 'UTF-8') ?></td>
+              <td class="col-1 d-flex gap-1 w-auto align-items-center">
+                <!-- Botão de editar -->
+                <a class="btn btn-secondary btn-sm" href="/editar_categoria?id=<?= (int) $categoria['id'] ?>" title="Editar categoria">
+                  <i class="bi bi-pencil"></i>
+                </a>
+
+                <!-- Botão de excluir com POST -->
+                <form action="/excluir_categoria" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir esta categoria?');" class="m-0">
+                  <input type="hidden" name="id" value="<?= (int) $categoria['id'] ?>">
+                  <button type="submit" class="btn btn-danger btn-sm" title="Excluir categoria">
+                    <i class="bi bi-trash"></i>
+                  </button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
         </tbody>
 
       </table>

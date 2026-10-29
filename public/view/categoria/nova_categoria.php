@@ -57,11 +57,11 @@
         <form action="/cadastrar_categoria" method="POST">
           <div class="mb-3">
             <label for="id" class="form-label">Id: </label>
-            <input type="email" class="form-control" id="id" disabled value="0">
+            <input type="text" class="form-control" id="id" disabled value="0">
           </div>
           <div class="mb-3">
             <label for="nome" class="form-label">Nome</label>
-            <input type="text" name="nome" class="form-control" id="nome" required>
+            <input type="text" name="nome" class="form-control" id="nome" maxlength="50" required>
           </div>
           <button type="submit" class="btn btn-primary">Salvar</button>
         </form>
